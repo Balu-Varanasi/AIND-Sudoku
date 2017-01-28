@@ -44,20 +44,14 @@ def naked_twins(values):
     Returns:
         the values dictionary with the naked twins eliminated from peers.
     """
-
-    # Find all instances of naked twins
-    # Eliminate the naked twins as possibilities for their peers
     for unit in unitlist:
-        # unitvalueslist gets value values correponding to all box of a unit
         unitvalueslist = [values[box] for box in unit]
-        # naked_twin_values: list of naked twin in a unit - considered chance for multiple naked twin scenario in a unit
         naked_twin_values = list(
             set([box_value for box_value in unitvalueslist if len(box_value) == 2 and unitvalueslist.count(box_value) == 2])
         )
         for naked_twin_value in naked_twin_values:
             for digit_to_replace in naked_twin_value:
                 for index, unit_box_value in enumerate(unitvalueslist):
-                    # the enumerate() function adds a counter to an iterable, so that unit list index can be accessed
                     if unit_box_value != naked_twin_value and len(unit_box_value) > 1:
                         values[unit[index]] = values[unit[index]].replace(digit_to_replace, '')
 
